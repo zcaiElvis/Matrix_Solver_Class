@@ -2,7 +2,7 @@
 
 
 
-Matrix_Solver Class contains:
+# Matrix_Solver Class contains:
 
 UpperTriangularMatrix function: a function which intakes any matrix and turns it into its corresponding uppertriangular matrix.
 
@@ -15,6 +15,6 @@ EigenValueGenerator function: a function which intakes any matrix and returns it
 
 
 
-Matrix_Solver unittest contains:
+# Matrix_Solver unittest contains:
 
 unittests of all function including helper functions (should be private, but now public for the sake of testing)
