@@ -1,5 +1,4 @@
-from decimal import *
-from fractions import *
+
 
 
 class MatrixSolver:
@@ -15,76 +14,92 @@ class MatrixSolver:
 
     def upperTriangularMatrix(self, A):
         self.isValidMatrix(A)
-        numit = self.iterationManager(A)
-        for x in (0, numit):
+        for x in range(0, len(A[0])-1):
             self.startPivoting(A,x)
+
+        return A
 
 
 
     def startPivoting(self,A,x):
+        print(" here in startPivoting" + str(x))
         self.findSwapMax(A,x)
         self.reducePivotColumn(A,x)
+
+        return A
 
 
 
     def findSwapMax(self, A, x):
-        numit = self.iterationManager(A)
         maxRowNumber = x
 
-        for y in range(0,len(A)):
-            print(A[y][x], A[maxRowNumber][x])
+        for y in range(x,len(A)):
             if A[y][x] > A[maxRowNumber][x]:
                 maxRowNumber = y
 
-        tmp = A[0]
-        A[0] = A[maxRowNumber]
+        tmp = A[x]
+        A[x] = A[maxRowNumber]
         A[maxRowNumber] = tmp
 
         return A;
 
 
     def reducePivotColumn(self,A,x):
-        numit = self.iterationManager(A)
         pivotRow = x
         pivot = A[x][x]
 
-        for m in range(1, numit+1):
+        for m in range(x+1, len(A)):
+            # print("m value is " + str(m))
             reduceTerm = A[m][x]
             if reduceTerm != 0:
                 ratio = pivot/reduceTerm
             l = A[m]
             A[m] = [c - a * ratio for c,a in zip(A[pivotRow],l)]
 
+        print("new A" + str(A))
+
         return A
 
 
-    def iterationManager(self,A):
-        numRow = len(A)
-        numCol = len(A[0])
-        return min(numRow,numCol)-1
 
 
 
 
 
+# a = MatrixSolver()
 
 
+e = [[1,2,2],[2,6,2],[3,3,5]]
+f = [[1,2,2],[2,6,2],[3,5,5]]
+f1= [[1,2,2],[2,6,2],[3,5,5]]
+g = [[1,2,2],[3,4,5]]
+
+w = [[2,3,4],[5,7,3],[2,6,5],[3,4,8]]
+q = [[1,2,3,4],[4,5,7,2],[2,8,7,1]]
+
+# dnew = [[3,4],[0,-2],[0, -5]]
+# print("--------")
+# print(a.startPivoting(d,0))
+# print(a.startPivoting(d,1))
+
+# print(a.startPivoting(e,0))
+# print("second start here")
+# print(a.findSwapMax(e,1))
+# print(a.reducePivotColumn(e,1))
+
+# print(a.startPivoting(f,0))
+# print(a.startPivoting(f,1))
+# print(a.upperTriangularMatrix(g))
+# print(a.upperTriangularMatrix(f1))
+# print("-------------------------------------------")
+# print(a.upperTriangularMatrix(g))
+# print(a.upperTriangularMatrix(w))
+# print(a.upperTriangularMatrix(q))
 
 
+a = MatrixSolver()
 
-
-
-
-a  = MatrixSolver()
-someMatrix = [[1,2]]
-somearray=[1,2,3]
-
-
-
-
-c=[[10,1,1],[1,2,7],[2,6,8]]
-
-
-print(c)
-a.findSwapMax(c,0)
-print(c)
+# print(a.upperTriangularMatrix(f))
+# print(a.upperTriangularMatrix(g))
+print(a.upperTriangularMatrix(w))
+# print(a.upperTriangularMatrix(q))
